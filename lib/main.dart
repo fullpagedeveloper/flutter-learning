@@ -2,25 +2,44 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int number = 0;
+
+  void tekanTombol() {
+    //setState => untuk me-refrash tampilan di layar
+    setState(() {
+      number = number + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Latihan Row dan Column"),
+          title: Text("Statfull Demo"),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // column
-          crossAxisAlignment: CrossAxisAlignment.start, //row
-          children: <Widget>[
-            Text("Text 1"),
-            Text("Text 2"),
-            Text("Text 3"),
-            Row(
-              children: <Widget>[Text('data'), Text('data 2')],
-            )
-          ],
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                number.toString(),
+                style: TextStyle(
+                  fontSize: 10 + number.toDouble(),
+                ),
+              ),
+              RaisedButton(
+                child: Text("Tambah bilangan"),
+                onPressed: tekanTombol,
+              )
+            ],
+          ),
         ),
       ),
     );
