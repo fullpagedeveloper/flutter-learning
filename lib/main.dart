@@ -2,24 +2,51 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<Widget> list = [];
+  int counter = 1;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Latihan Row dan Column"),
+          title: Text("ListView"),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // column
-          crossAxisAlignment: CrossAxisAlignment.start, //row
+        body: ListView(
           children: <Widget>[
-            Text("Text 1"),
-            Text("Text 2"),
-            Text("Text 3"),
             Row(
-              children: <Widget>[Text('data'), Text('data 2')],
-            )
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                RaisedButton(
+                  child: Text("Tambah Data++"),
+                  onPressed: () {
+                    setState(() {
+                      list.add(Text("Data ke- ${counter.toString()}"));
+                      counter++;
+                    });
+                  },
+                ),
+                RaisedButton(
+                  child: Text("Hapus Data--"),
+                  onPressed: () {
+                    setState(() {
+                      list.removeLast();
+                      counter--;
+                    });
+                  },
+                )
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: list,
+            ),
           ],
         ),
       ),
