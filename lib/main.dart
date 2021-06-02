@@ -2,25 +2,41 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({Key key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  //textfield butuh yang namanya controller dan bisa dikasih nilai awal textnya
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Latihan Row dan Column"),
+          title: Text("Latihan TextField Widget"),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // column
-          crossAxisAlignment: CrossAxisAlignment.start, //row
-          children: <Widget>[
-            Text("Text 1"),
-            Text("Text 2"),
-            Text("Text 3"),
-            Row(
-              children: <Widget>[Text('data'), Text('data 2')],
-            )
-          ],
+        body: Container(
+          margin: EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              TextField(
+                //update tampilan
+                onChanged: (value) {
+                  setState(() {});
+                },
+                //end update tampilan
+
+                controller: controller,
+              ),
+              Text(controller.text),
+            ],
+          ),
         ),
       ),
     );
